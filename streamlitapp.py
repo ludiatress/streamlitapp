@@ -9,9 +9,11 @@ import streamlit as st
 st.title('Credit Card Fraud Detection!')
 
 # Load the dataset from the csv file using pandas
-df=st.cache_data(pd.read_csv)('creditcard.csv')
-df = df.sample(frac=0.1, random_state = 48)
-
+file = st.file_uploader("Please choose a file")
+if file is not None:
+    df=st.cache_data(pd.read_csv)(file)
+    df = df.sample(frac=0.1, random_state = 48)
+    
 # Print shape and description of the data
 if st.sidebar.checkbox('Show what the dataframe looks like'):
     st.write(df.head(100))
